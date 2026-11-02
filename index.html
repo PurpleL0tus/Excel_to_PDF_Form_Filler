@@ -436,6 +436,13 @@ ul.issues li { margin: 2px 0; }
 .empty-state { text-align: center; color: var(--muted); display: grid; gap: 6px; padding: 40px 16px; align-content: center; box-sizing: border-box; width: 100%;
   /* as tall as an A4 page at this width (capped like a loaded page), so the panel doesn't jump when one arrives */
   height: min(calc(100vh - 182px), calc(100cqw * 1.4142 + 8px)); }
+/* Until the page's script has measured the screen, the empty page already has its A4 shape and the size the
+   script will give it (the height left on screen), so it doesn't start small and then jump. */
+@media (min-width: 921px) {
+  #pvEmpty:not([style]) { height: max(240px, calc(100vh - 188px)); width: min(952px, max(240px, calc(100vh - 188px)) * 595 / 842); }
+  .preview:not([style]) { width: calc(min(952px, max(240px, calc(100vh - 188px)) * 595 / 842) + 122px); }   /* page + the panel's side padding */
+  header.top:not([style]) { width: calc(min(952px, max(240px, calc(100vh - 188px)) * 595 / 842) + 122px + 440px + 72px); max-width: 100%; margin-inline: auto; }
+}
 .empty-state span:empty { display: none; }
 .empty-state strong { color: #a9adb3; font-weight: 500; }
 .spinner { width: 22px; height: 22px; border: 3px solid var(--rule); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto; }
